@@ -1,7 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Image, Animated, StyleSheet } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../App';
 
-const Splash = () => {
+type SplashNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Splash'>;
+
+interface Props {
+  navigation: SplashNavigationProp;
+}
+
+const Splash = ({ navigation }: Props) => {
   const dot1 = useRef(new Animated.Value(0.3)).current;
   const dot2 = useRef(new Animated.Value(0.3)).current;
   const dot3 = useRef(new Animated.Value(0.3)).current;
@@ -29,7 +37,14 @@ const Splash = () => {
         createAnimation(dot3),
       ]),
     ).start();
-  }, [dot1, dot2, dot3]);
+
+    // Navigate to Home after 5 seconds
+    const timer = setTimeout(() => {
+      navigation.replace('Home');
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [dot1, dot2, dot3, navigation]);
 
   return (
     <View style={styles.container}>

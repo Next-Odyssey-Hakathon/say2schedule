@@ -1,26 +1,24 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Splash from './src/screens/Splash';
 import Home from './src/screens/Home';
+import CalendarScreen from './src/screens/Calender'; // Keeping spelling for now to avoid break
+import TaskScreen from './src/screens/Task';
+
+export type RootStackParamList = {
+  Splash: undefined;
+  Home: undefined;
+  Calender: undefined;
+  Task: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
   return (
     <SafeAreaProvider>
       <StatusBar
@@ -28,9 +26,20 @@ function App() {
         backgroundColor="transparent"
         translucent={true}
       />
-      <View style={styles.container}>
-        {isLoading ? <Splash /> : <Home />}
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator 
+          initialRouteName="Splash"
+          screenOptions={{
+            headerShown: false, // Maintain custom design
+            animation: 'fade',
+          }}
+        >
+          <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Calender" component={CalendarScreen} />
+          <Stack.Screen name="Task" component={TaskScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }
@@ -38,10 +47,8 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff', // Ensure background fills the entire screen
+    backgroundColor: '#ffffff',
   },
 });
 
 export default App;
-
-
