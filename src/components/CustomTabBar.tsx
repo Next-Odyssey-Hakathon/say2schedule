@@ -1,29 +1,52 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, Image, StyleSheet, Dimensions, Platform } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../App';
 
 const { width } = Dimensions.get('window');
 
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 const CustomTabBar = () => {
-  const [activeTab, setActiveTab] = useState('AI');
+  const navigation = useNavigation<NavigationProp>();
+  const route = useRoute();
 
   const tabs = [
-    { name: 'Schedule', icon: require('../assets/schedule.png') },
-    { name: 'AI', icon: require('../assets/ai.png') },
+    { name: 'Calender', icon: require('../assets/schedule.png') },
+    { name: 'Home', icon: require('../assets/ai.png') },
     { name: 'Task', icon: require('../assets/task.png') },
   ];
+
+  // Helper to determine active state
+  const getIsActive = (tabName: string) => {
+    return route.name === tabName;
+  };
+
+  const handlePress = (tabName: string) => {
+    if (route.name !== tabName) {
+      if (tabName === 'Home') {
+        navigation.navigate('Home');
+      } else if (tabName === 'Calender') {
+        navigation.navigate('Calender');
+      } else if (tabName === 'Task') {
+        navigation.navigate('Task');
+      }
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.tabBar}>
         {tabs.map((tab) => {
-          const isActive = activeTab === tab.name;
-          const isAI = tab.name === 'AI';
-          
+          const isActive = getIsActive(tab.name);
+          const isAI = tab.name === 'Home';
+
           return (
             <TouchableOpacity
               key={tab.name}
               style={styles.tabItem}
-              onPress={() => setActiveTab(tab.name)}
+              onPress={() => handlePress(tab.name)}
               activeOpacity={0.7}
             >
               <View style={[

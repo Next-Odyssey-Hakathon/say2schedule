@@ -33,6 +33,7 @@ const Home = ({ navigation }: Props) => {
                 <View style={styles.heroTextContainer}>
                     <Text style={styles.heroText}>Lets Schedule</Text>
                     <Text style={styles.heroText}>your day !</Text>
+                    <Text style={styles.trackHabitText}>Track your habit</Text>
                     <Text style={styles.subHeroText}>
                         Organize and schedule your time seamlessly by interacting with our AI-powered app via image, voice, or text.
                     </Text>
@@ -100,6 +101,13 @@ const styles = StyleSheet.create({
         marginTop: 15,
         lineHeight: 24,
         paddingRight: 60,
+    },
+    trackHabitText: {
+        fontSize: 18,
+        color: '#34C759',
+        fontWeight: '600',
+        marginTop: 5,
+        letterSpacing: 0.5,
     },
     actionButtonsContainer: {
         flexDirection: 'row',

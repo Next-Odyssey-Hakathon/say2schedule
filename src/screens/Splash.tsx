@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Image, Animated, StyleSheet } from 'react-native';
+import { View, Image, Animated, StyleSheet, StatusBar } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
 
@@ -48,6 +48,11 @@ const Splash = ({ navigation }: Props) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar 
+        barStyle="dark-content" 
+        backgroundColor="transparent" 
+        translucent={true} 
+      />
       <View style={styles.centerContainer}>
         <Image
           source={require('../assets/logosaytoschedule.png')}
