@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       paddingVertical: 15,
-      marginBottom: 80, // Reduced as TabBar is now thinner and fixed at bottom
+      marginBottom: 100, // Adjusted to clear the new standard TabBar
   },
   legendItem: {
       flexDirection: 'row',

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     container: {
         width: width,
         paddingHorizontal: 25,
-        marginBottom: 30, // Reduced since TabBar is removed
+        marginBottom: 30, // Reduced since TabBar is removed from Home
     },
     inputWrapper: {
         backgroundColor: '#ffffff',
